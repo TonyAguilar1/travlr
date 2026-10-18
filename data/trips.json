@@ -82,5 +82,112 @@
             "Check local weather conditions before planning your trip"
         ],
         "link": "/travel"
+    },
+    {
+        "code": "KAYK270410",
+        "name": "Mangrove Kayak Adventure",
+        "length": "3 nights / 4 days",
+        "start": "2027-04-10T08:00:00Z",
+        "resort": "Emerald Bay, 3 stars",
+        "perPerson": "649.00",
+        "image": "images/kayak.jpg",
+        "description": "Paddle through quiet mangrove channels and hidden lagoons on guided kayak tours. A relaxed trip for beginners and families, with time to snorkel the shallow flats and spot rays, herons and juvenile reef fish.",
+        "location": "Caribbean Sea",
+        "activities": [
+            "kayaking",
+            "snorkeling",
+            "bird watching"
+        ],
+        "best_time_to_visit": "March to May",
+        "accommodation": [
+            "beach resorts",
+            "eco-lodges"
+        ],
+        "travel_tips": [
+            "Wear water shoes",
+            "Bring a dry bag for your phone",
+            "Paddle early to avoid afternoon wind"
+        ],
+        "link": "/travel"
+    },
+    {
+        "code": "SEAS270605",
+        "name": "Sea Sound Escape",
+        "length": "5 nights / 6 days",
+        "start": "2027-06-05T08:00:00Z",
+        "resort": "Blue Lagoon, 4 stars",
+        "perPerson": "1149.00",
+        "image": "images/sea-sound.jpg",
+        "description": "A slower-paced getaway built around the sound: sunrise boat rides, sandbar picnics and two guided dives on the outer wall. Evenings are free for the resort's seafood dinners and sunset deck.",
+        "location": "Caribbean Sea",
+        "activities": [
+            "boating",
+            "diving",
+            "beach picnics"
+        ],
+        "best_time_to_visit": "May to July",
+        "accommodation": [
+            "beach resorts",
+            "villas"
+        ],
+        "travel_tips": [
+            "Book dives at least a day ahead",
+            "Pack a light rain jacket",
+            "Carry cash for local boat tips"
+        ],
+        "link": "/travel"
+    },
+    {
+        "code": "SUIT270918",
+        "name": "Oceanfront Suite Retreat",
+        "length": "6 nights / 7 days",
+        "start": "2027-09-18T08:00:00Z",
+        "resort": "Coral Crest, 5 stars",
+        "perPerson": "2199.00",
+        "image": "images/suite.jpg",
+        "description": "Our premium package: an oceanfront suite, daily breakfast, a private snorkel charter and spa credit. Ideal for honeymoons and anniversaries, with butler service and late checkout included.",
+        "location": "Caribbean Sea",
+        "activities": [
+            "private charters",
+            "spa",
+            "snorkeling"
+        ],
+        "best_time_to_visit": "September to November",
+        "accommodation": [
+            "luxury resorts"
+        ],
+        "travel_tips": [
+            "Reserve spa times on arrival",
+            "Ask about the anniversary upgrade",
+            "Dress code applies at the main restaurant"
+        ],
+        "link": "/travel"
+    },
+    {
+        "code": "DEEP271112",
+        "name": "Deep Reef Dive Week",
+        "length": "7 nights / 8 days",
+        "start": "2027-11-12T08:00:00Z",
+        "resort": "Blue Lagoon, 4 stars",
+        "perPerson": "1899.00",
+        "image": "images/reef2.jpg",
+        "description": "Ten boat dives across the region's best walls and wrecks for certified divers, including one night dive. Equipment rental, nitrox fills and a dive guide are included in the package.",
+        "location": "Caribbean Sea",
+        "activities": [
+            "diving",
+            "night diving",
+            "wreck diving"
+        ],
+        "best_time_to_visit": "October to December",
+        "accommodation": [
+            "dive resorts",
+            "liveaboard boats"
+        ],
+        "travel_tips": [
+            "Bring your certification card",
+            "Do not fly within 24 hours of diving",
+            "Log your dives each day"
+        ],
+        "link": "/travel"
     }
 ]

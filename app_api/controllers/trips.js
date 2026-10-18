@@ -6,36 +6,41 @@ const Model = mongoose.model('trips');
 //Regardless of outcome, response must include HTML status code
 //and JSON message to the requesting client
 const tripList = async (req, res) => {
-    const q = await Model
-        .find({}) 
-        .exec();
+    try {
+        const q = await Model
+            .find({})
+            .exec();
 
-        console.log(q);
+        // console.log(q);
 
-
-    if(!q)
-    { //Database returned no data
-        return res
-             .status(404)
-             .json({message: "No trips found"});
-    } else {
-        return res
-             .status(200)
-             .json(q);
+        if (!q) { // Database returned no data
+            return res
+                .status(404)
+                .json({ message: "No trips found" });
+        } else {
+            return res
+                .status(200)
+                .json(q);
+        }
+    } catch (err) { // Database error - respond instead of crashing the server
+        return res.status(500).json({ message: 'Database error', error: err.message });
     }
-
 };
 
 // GET: /trips/:tripCode - returns a single trip
 const tripsFindByCode = async (req, res) => {
-    const q = await Model
-        .find({ 'code': req.params.tripCode })
-        .exec();
+    try {
+        const q = await Model
+            .find({ 'code': req.params.tripCode })
+            .exec();
 
-    if (!q) {
-        return res.status(404).json({ message: 'Trip not found' });
-    } else {
-        return res.status(200).json(q);
+        if (!q || q.length === 0) { // find() returns [] when nothing matches
+            return res.status(404).json({ message: 'Trip not found: ' + req.params.tripCode });
+        } else {
+            return res.status(200).json(q);
+        }
+    } catch (err) { // Database error - respond instead of crashing the server
+        return res.status(500).json({ message: 'Database error', error: err.message });
     }
 };
 

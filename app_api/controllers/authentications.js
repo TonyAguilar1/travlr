@@ -18,21 +18,30 @@ const register = async (req, res) => {
 });
 
 user.setPassword(req.body.password);    // set user password
-const q = await user.save();
 
-    if (!q) 
-        {
-         // database error, return error message   
-        return res
-        .status(400)
-        .json({ message: 'Error registering user' });
-    
-    }else {
+    try {
+        const q = await user.save();
+        if (!q) {
+            // database error, return error message
+            return res
+                .status(400)
+                .json({ message: 'Error registering user' });
+        }
         // Return new user token
         const token = user.generateJWT();
-        res
+        return res
             .status(200)
             .json({ token });
+    } catch (err) {
+        // e.g. duplicate email (unique index) - return a clean error instead of crashing
+        if (err.code === 11000) {
+            return res
+                .status(409)
+                .json({ message: 'A user with that email already exists' });
+        }
+        return res
+            .status(400)
+            .json(err);
     }
 };
 
