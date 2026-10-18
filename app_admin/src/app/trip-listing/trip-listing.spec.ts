@@ -1,16 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TripListing } from './trip-listing';
+import { provideRouter } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { TripListingComponent } from './trip-listing';
 
-describe('TripListing', () => {
-  let component: TripListing;
-  let fixture: ComponentFixture<TripListing>;
+describe('TripListingComponent', () => {
+  let component: TripListingComponent;
+  let fixture: ComponentFixture<TripListingComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TripListing],
+      imports: [TripListingComponent],
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TripListing);
+    fixture = TestBed.createComponent(TripListingComponent);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

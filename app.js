@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load environment variables from .env file (must be first)
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -17,6 +19,10 @@ require('./app_api/models/db');
 
 var app = express();
 
+// wire in our authentication module
+var passport = require('passport');
+require('./app_api/config/passport');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 
@@ -29,11 +35,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize()); // Initialize passport for authentication 
 
 //Enable CORS
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
@@ -58,6 +65,15 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+// catch unauthorized errors and create 401
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res
+    .status(401)
+    .json({ message: err.name + ": " + err.message });
+  }
 });
 
 module.exports = app;

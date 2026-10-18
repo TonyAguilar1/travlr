@@ -109,9 +109,29 @@ const tripsUpdateTrip = async (req, res) => {
     // console.log(q);
 };
 
+// DELETE: /trips/:tripCode - Deletes a Trip
+// Regardless of outcome, response must include HTML status code
+// and JSON message to the requesting client
+const tripsDeleteTrip = async (req, res) => {
+    try {
+        const q = await Model
+            .findOneAndDelete({ 'code': req.params.tripCode })
+            .exec();
+
+        if (!q) { // No trip with that code
+            return res.status(404).json({ message: 'Trip not found: ' + req.params.tripCode });
+        } else { // Return the trip that was deleted
+            return res.status(200).json(q);
+        }
+    } catch (err) {
+        return res.status(400).json(err);
+    }
+};
+
 module.exports = {
     tripList,
     tripsFindByCode,
     tripsAddTrip,
-    tripsUpdateTrip
+    tripsUpdateTrip,
+    tripsDeleteTrip
 };

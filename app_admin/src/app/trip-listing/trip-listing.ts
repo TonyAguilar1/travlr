@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TripCardComponent } from '../trip-card/trip-card';
 
 import { TripDataService } from '../services/trip-data.service';
 import { Trip } from '../models/trip';
 import { Router } from '@angular/router';
+import { Authentication } from '../services/authentication';
 
 @Component({
   selector: 'app-trip-listing',
@@ -21,13 +22,27 @@ export class TripListingComponent implements OnInit {
 
   constructor(
     private tripDataService: TripDataService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef,
+    private authenticationService: Authentication
   ) {
     console.log('trip-listing constructor');
   }
 
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
+  }
+
   public addTrip(): void {
     this.router.navigate(['add-trip']);
+  }
+
+  // Called by a trip-card after it deletes its trip
+  public onTripDeleted(tripCode: string): void {
+    this.trips = this.trips.filter(t => t.code !== tripCode);
+    this.message = 'There are ' + this.trips.length + ' trips available.';
+    console.log(this.message);
+    this.cdr.markForCheck();
   }
 
   private getStuff(): void {
@@ -42,9 +57,11 @@ export class TripListingComponent implements OnInit {
             this.message = 'There were no trips retrieved from the database';
           }
           console.log(this.message);
+          // Angular 22 is zoneless: tell it the data changed so the cards render
+          this.cdr.markForCheck();
         },
         error: (error: any) => {
-          console.log('Error: ' + error);
+          console.error('Error loading trips:', error.status, error.statusText, error.message);
         }
       })
   }
